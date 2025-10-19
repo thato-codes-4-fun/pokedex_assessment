@@ -28,11 +28,11 @@ class AuthViewModel extends ChangeNotifier {
         email: email,
         password: password,
       );
-      loading = false;
       return user.user;
     } catch (e) {
+      rethrow;
+    } finally {
       loading = false;
-      throw Exception(e);
     }
   }
 
