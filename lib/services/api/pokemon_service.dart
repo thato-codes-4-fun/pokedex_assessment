@@ -36,4 +36,10 @@ class PokemonService {
     final data = json.decode(response.body);
     return PokemonDetails.fromJson(data);
   }
+
+  static Future<PokemonResponse> searchPokemon(String name) async {
+    final response = await http.get(Uri.parse('$baseUrl/pokemon/$name'));
+    final data = json.decode(response.body);
+    return PokemonResponse.fromJson(data);
+  }
 }

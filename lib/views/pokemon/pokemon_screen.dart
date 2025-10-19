@@ -13,6 +13,7 @@ class PokemonScreen extends StatefulWidget {
 
 class _PokemonScreenState extends State<PokemonScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   String _searchQuery = '';
 
   @override
@@ -27,12 +28,25 @@ class _PokemonScreenState extends State<PokemonScreen> {
         _searchQuery = _searchController.text.toLowerCase();
       });
     });
+
+    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent * 0.8) {
+      if (_searchQuery.isEmpty) {
+        context.read<PokemonViewModel>().loadMorePokemons();
+      }
+    }
   }
 
   @override
@@ -80,7 +94,6 @@ class _PokemonScreenState extends State<PokemonScreen> {
               ),
             ),
 
-            // Results count
             if (_searchQuery.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -93,7 +106,6 @@ class _PokemonScreenState extends State<PokemonScreen> {
                 ),
               ),
 
-            // Pokemon List
             Expanded(
               child: pokemonVM.loading
                   ? const Center(child: CircularProgressIndicator())
@@ -127,9 +139,23 @@ class _PokemonScreenState extends State<PokemonScreen> {
                       ),
                     )
                   : ListView.builder(
+                      controller: _scrollController,
                       padding: const EdgeInsets.all(16.0),
-                      itemCount: filteredPokemons.length,
+                      itemCount:
+                          filteredPokemons.length +
+                          (_searchQuery.isEmpty && pokemonVM.hasMore ? 1 : 0),
                       itemBuilder: (context, index) {
+                        if (index == filteredPokemons.length) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Center(
+                              child: pokemonVM.loadingMore
+                                  ? const CircularProgressIndicator()
+                                  : const SizedBox.shrink(),
+                            ),
+                          );
+                        }
+
                         return PokemonTile(
                           pokemon: filteredPokemons[index],
                           onTap: () async {

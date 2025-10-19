@@ -13,11 +13,15 @@ class PokemonViewModel extends ChangeNotifier {
   int _offset = 0;
   bool _loading = false;
   bool _loadingDetails = false;
+  bool _loadingMore = false;
+  bool _hasMore = true;
 
   List<Pokemon> get pokemons => _pokemons;
   Pokemon? get selectedPokemon => _selectedPokemon;
   bool get loading => _loading;
   bool get loadingDetails => _loadingDetails;
+  bool get loadingMore => _loadingMore;
+  bool get hasMore => _hasMore;
   int get limit => _limit;
   int get offset => _offset;
   PokemonDetails? get pokemonDetail => _pokemonDetail;
@@ -91,11 +95,37 @@ class PokemonViewModel extends ChangeNotifier {
         _offset,
       );
       _pokemons = pokemons.results;
+      _hasMore = pokemons.next != null;
       notifyListeners();
     } catch (e) {
       throw Exception(e);
     } finally {
       loading = false;
+    }
+  }
+
+  Future<void> loadMorePokemons() async {
+    if (_loadingMore || !_hasMore) return;
+
+    try {
+      _loadingMore = true;
+      notifyListeners();
+
+      final newOffset = _offset + _limit;
+      final response = await PokemonService.getPokemonListPaginated(
+        _limit,
+        newOffset,
+      );
+
+      _pokemons.addAll(response.results);
+      _offset = newOffset;
+      _hasMore = response.next != null;
+      notifyListeners();
+    } catch (e) {
+      print('Error loading more Pokemon: $e');
+    } finally {
+      _loadingMore = false;
+      notifyListeners();
     }
   }
 
