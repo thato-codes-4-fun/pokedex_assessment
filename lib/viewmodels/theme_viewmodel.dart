@@ -19,11 +19,6 @@ class ThemeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> init() async {
-    final box = await Hive.openBox(_boxName);
-    _isDarkMode = box.get(_key, defaultValue: false);
-  }
-
   void toggleTheme() async {
     _isDarkMode = !_isDarkMode;
     final box = await Hive.openBox(_boxName);

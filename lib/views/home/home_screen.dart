@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_assessment/viewmodels/theme_viewmodel.dart';
 import 'package:pokedex_assessment/views/favorites/favorites_screen.dart';
 import 'package:pokedex_assessment/views/profile/profile_screen.dart';
+import 'package:pokedex_assessment/views/pokemon/pokemon_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,26 +13,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _isDarkMode = false;
   final List<Widget> _pages = [
-    HomeScreen(),
-    ProfileScreen(),
+    PokemonScreen(),
     FavoritesScreen(),
+    ProfileScreen(),
   ];
 
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final themeVM = context.watch<ThemeViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
         actions: [
           Switch(
-            value: _isDarkMode,
+            value: themeVM.isDarkMode,
             onChanged: (value) {
               setState(() {
-                _isDarkMode = value;
+                themeVM.toggleTheme();
               });
             },
           ),

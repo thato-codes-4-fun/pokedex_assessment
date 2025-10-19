@@ -10,7 +10,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   final themeVM = ThemeViewModel();
-  await themeVM.init();
   runApp(
     ChangeNotifierProvider(create: (context) => themeVM, child: const MyApp()),
   );
