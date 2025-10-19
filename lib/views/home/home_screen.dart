@@ -19,7 +19,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   bool _isDrawerOpen = false;
-  final List<Widget> _pages = [PokemonScreen(), FavoritesScreen()];
+  final List<Widget> _pages = [
+    PokemonScreen(),
+    FavoritesScreen(),
+    ProfileScreen(),
+  ];
 
   initState() {
     super.initState();
@@ -28,20 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(
-        elevation: 0,
-
-        child: Column(
-          children: [
-            Text(
-              'Manage App Settings',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            ProfileScreen(),
-          ],
-        ),
-      ),
-
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('Pokemon Library'),
@@ -76,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.favorite),
             label: 'Favorite',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );

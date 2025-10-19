@@ -20,15 +20,22 @@ class _PokemonTileState extends State<PokemonTile> {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      title: Text(widget.pokemon.name),
-      subtitle: Text(widget.pokemon.url),
-      leading: Image.network(widget.pokemon.getImageUrl),
-      trailing: IconButton(
-        onPressed: widget.onTap,
-        icon: Icon(Icons.favorite_border),
-        color: Colors.red,
+    return InkWell(
+      onTap: widget.onTap,
+      child: ListTile(
+        dense: true,
+        title: Text(widget.pokemon.name),
+        subtitle: Text(widget.pokemon.url),
+        leading: Image.network(widget.pokemon.getImageUrl),
+        trailing: IconButton(
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Pokemon added to favorites')),
+            );
+          },
+          icon: Icon(Icons.favorite_border),
+          color: Colors.red,
+        ),
       ),
     );
   }

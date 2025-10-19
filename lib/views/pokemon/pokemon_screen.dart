@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_assessment/core/routes/app_router.dart';
 import 'package:pokedex_assessment/viewmodels/pokemon_viewmodel.dart';
 import 'package:pokedex_assessment/views/widgets/pokemon_tile.dart';
 import 'package:provider/provider.dart';
@@ -29,10 +30,13 @@ class _PokemonScreenState extends State<PokemonScreen> {
                 itemBuilder: (context, index) {
                   return PokemonTile(
                     pokemon: pokemonVM.pokemons[index],
-                    onTap: () {
-                      pokemonVM.getPokemonDetailsByUrl(
+                    onTap: () async {
+                      await pokemonVM.getPokemonDetailsByUrl(
                         pokemonVM.pokemons[index].url,
                       );
+                      if (context.mounted) {
+                        Navigator.pushNamed(context, AppRouter.pokemonDetails);
+                      }
                     },
                   );
                 },
