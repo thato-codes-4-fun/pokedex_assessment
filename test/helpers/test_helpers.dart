@@ -43,7 +43,7 @@ String mockPokemonListResponse() {
     {
       "name": "ivysaur",
       "url": "https://pokeapi.co/api/v2/pokemon/2/"
-    },
+    }
   ]
 }
 ''';
