@@ -244,29 +244,6 @@ The application is structured for easy testing:
 - Mockable dependencies via Provider
 - Pure functions in models
 
-## 📝 Development Notes
-
-### API Rate Limiting
-
-PokeAPI is free and doesn't require authentication, but consider:
-
-- Caching responses to minimize requests
-- Loading all Pokemon names once for search
-- Pagination for list views
-
-### Performance Optimizations
-
-- Image caching with cached_network_image
-- Details cache to avoid redundant API calls
-- Lazy loading with infinite scroll
-- Efficient list rendering with ListView.builder
-
-### Known Limitations
-
-- Requires internet for initial Pokemon list load
-- Search requires loading all Pokemon names (~1000 items)
-- No offline mode for Pokemon list (only favorites work offline)
-
 ## 🤝 Contributing
 
 This is an assessment project. For educational purposes only.
