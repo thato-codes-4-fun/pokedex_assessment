@@ -9,7 +9,7 @@ class PokemonViewModel extends ChangeNotifier {
   PokemonDetails? _pokemonDetail;
   final Map<int, PokemonDetails> _detailsCache = {};
   Pokemon? _selectedPokemon;
-  int _limit = 10;
+  int _limit = 20;
   int _offset = 0;
   bool _loading = false;
   bool _loadingDetails = false;

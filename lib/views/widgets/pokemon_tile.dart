@@ -25,8 +25,8 @@ class _PokemonTileState extends State<PokemonTile> {
       child: ListTile(
         dense: true,
         title: Text(widget.pokemon.name),
-        subtitle: Text(widget.pokemon.url),
-        leading: Image.network(widget.pokemon.getImageUrl),
+        // subtitle: Text(widget.pokemon.url),
+        leading: Image.network(widget.pokemon.getImageUrl, fit: BoxFit.contain),
         trailing: IconButton(
           onPressed: () {
             ScaffoldMessenger.of(context).showSnackBar(

@@ -26,6 +26,7 @@ class _PokemonScreenState extends State<PokemonScreen> {
         return pokemonVM.loading
             ? const Center(child: CircularProgressIndicator())
             : ListView.builder(
+                padding: const EdgeInsets.all(16.0),
                 itemCount: pokemonVM.pokemons.length,
                 itemBuilder: (context, index) {
                   return PokemonTile(
