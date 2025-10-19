@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_assessment/viewmodels/pokemon_viewmodel.dart';
+import 'package:pokedex_assessment/views/widgets/pokemon_tile.dart';
 import 'package:provider/provider.dart';
 
 class PokemonScreen extends StatefulWidget {
@@ -26,7 +27,14 @@ class _PokemonScreenState extends State<PokemonScreen> {
             : ListView.builder(
                 itemCount: pokemonVM.pokemons.length,
                 itemBuilder: (context, index) {
-                  return Text(pokemonVM.pokemons[index].name);
+                  return PokemonTile(
+                    pokemon: pokemonVM.pokemons[index],
+                    onTap: () {
+                      pokemonVM.getPokemonDetailsByUrl(
+                        pokemonVM.pokemons[index].url,
+                      );
+                    },
+                  );
                 },
               );
       },

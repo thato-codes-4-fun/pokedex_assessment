@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:pokedex_assessment/models/pokemon.dart';
+import 'package:pokedex_assessment/models/pokemon_details.dart';
 import 'package:pokedex_assessment/models/pokemonResponse.dart';
 
 class PokemonService {
-  static const String baseUrl = 'https://pokeapi.co/api/v2/';
+  static const String baseUrl = 'https://pokeapi.co/api/v2';
 
   static Future<PokemonResponse> getPokemonListPaginated(
     int limit,
@@ -28,5 +29,11 @@ class PokemonService {
     final response = await http.get(Uri.parse('$baseUrl/pokemon/$name'));
     final data = json.decode(response.body);
     return Pokemon.fromJson(data);
+  }
+
+  static Future<PokemonDetails> getPokemonDetailsByUrl(String url) async {
+    final response = await http.get(Uri.parse(url));
+    final data = json.decode(response.body);
+    return PokemonDetails.fromJson(data);
   }
 }

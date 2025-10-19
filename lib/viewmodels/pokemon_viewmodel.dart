@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_assessment/models/pokemon.dart';
+import 'package:pokedex_assessment/models/pokemon_details.dart';
 import 'package:pokedex_assessment/services/api/pokemon_service.dart';
 
 class PokemonViewModel extends ChangeNotifier {
   List<Pokemon> _pokemons = [];
+  List<PokemonDetails> _pokemonDetails = [];
+  final Map<int, PokemonDetails> _detailsCache = {};
   Pokemon? _selectedPokemon;
   int _limit = 10;
   int _offset = 0;
@@ -11,24 +14,26 @@ class PokemonViewModel extends ChangeNotifier {
 
   List<Pokemon> get pokemons => _pokemons;
   Pokemon? get selectedPokemon => _selectedPokemon;
-  set selectedPokemon(Pokemon? value) {
-    _selectedPokemon = value;
-    notifyListeners();
-  }
-
   bool get loading => _loading;
+  int get limit => _limit;
+  int get offset => _offset;
+  Map<int, PokemonDetails> get detailsCache => _detailsCache;
+
   set loading(bool value) {
     _loading = value;
     notifyListeners();
   }
 
-  int get limit => _limit;
+  set selectedPokemon(Pokemon? value) {
+    _selectedPokemon = value;
+    notifyListeners();
+  }
+
   set limit(int value) {
     _limit = value;
     notifyListeners();
   }
 
-  int get offset => _offset;
   set offset(int value) {
     _offset = value;
     notifyListeners();
@@ -42,6 +47,29 @@ class PokemonViewModel extends ChangeNotifier {
   void previousPage() {
     offset = offset - limit;
     getAllPokemons();
+  }
+
+  Future<PokemonDetails?> getPokemonDetailsByUrl(String url) async {
+    final parts = url.split('/');
+    final id = int.tryParse(parts[parts.length - 2]) ?? 0;
+    if (id == 0) {
+      return null;
+    }
+    if (detailsCache.containsKey(id)) {
+      return detailsCache[id];
+    }
+
+    try {
+      loading = true;
+      final pokemon = await PokemonService.getPokemonDetailsByUrl(url);
+      detailsCache[id] = pokemon;
+      notifyListeners();
+      return pokemon;
+    } catch (e) {
+      return null;
+    } finally {
+      loading = false;
+    }
   }
 
   Future<void> getAllPokemons() async {
