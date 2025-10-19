@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                   Scaffold.of(context).openEndDrawer();
                 },
-                icon: Icon(_isDrawerOpen ? Icons.close : Icons.menu),
+                icon: Icon(Icons.search),
               );
             },
           ),

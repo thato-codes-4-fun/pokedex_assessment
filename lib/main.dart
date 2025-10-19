@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeVm = context.watch<ThemeViewModel>();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'PokeDex Assessment',
       themeMode: themeVm.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: AppTheme.lightTheme,
