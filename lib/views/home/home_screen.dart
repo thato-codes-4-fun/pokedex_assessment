@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_assessment/core/routes/app_router.dart';
 import 'package:pokedex_assessment/viewmodels/auth_viewmodel.dart';
+import 'package:pokedex_assessment/viewmodels/pokemon_viewmodel.dart';
 import 'package:pokedex_assessment/viewmodels/theme_viewmodel.dart';
 import 'package:pokedex_assessment/views/favorites/favorites_screen.dart';
 import 'package:pokedex_assessment/views/profile/profile_screen.dart';
@@ -19,6 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   bool _isDrawerOpen = false;
   final List<Widget> _pages = [PokemonScreen(), FavoritesScreen()];
+
+  initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
