@@ -9,20 +9,29 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _loading = false;
 
   User? get currentUser => _auth.currentUser;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
 
   Future<User?> signInWithEmailAndPassword(
     String email,
     String password,
   ) async {
+    loading = true;
     try {
       final user = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      loading = false;
       return user.user;
     } catch (e) {
+      loading = false;
       throw Exception(e);
     }
   }
@@ -35,13 +44,16 @@ class AuthViewModel extends ChangeNotifier {
     String email,
     String password,
   ) async {
+    loading = true;
     try {
       final user = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      loading = false;
       return user.user;
     } catch (e) {
+      loading = false;
       throw Exception(e);
     }
   }
