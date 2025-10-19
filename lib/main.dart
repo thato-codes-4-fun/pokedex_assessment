@@ -7,8 +7,9 @@ import 'package:pokedex_assessment/core/routes/app_router.dart';
 import 'package:pokedex_assessment/core/theme/app_theme.dart';
 import 'package:pokedex_assessment/firebase_options.dart';
 import 'package:pokedex_assessment/viewmodels/auth_viewmodel.dart';
+import 'package:pokedex_assessment/viewmodels/favourite_viewmodel.dart';
+import 'package:pokedex_assessment/viewmodels/pokemon_viewmodel.dart';
 import 'package:pokedex_assessment/viewmodels/theme_viewmodel.dart';
-import 'package:pokedex_assessment/views/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -21,6 +22,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => themeVM),
         ChangeNotifierProvider(create: (context) => AuthViewModel()),
+        ChangeNotifierProvider(create: (context) => PokemonViewModel()),
+        ChangeNotifierProvider(create: (context) => FavouriteViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeVm = context.watch<ThemeViewModel>();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'PokeDex Assessment',
       themeMode: themeVm.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: AppTheme.lightTheme,
