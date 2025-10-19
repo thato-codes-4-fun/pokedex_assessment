@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'package:pokedex_assessment/core/theme/app_theme.dart';
+import 'package:pokedex_assessment/firebase_options.dart';
 import 'package:pokedex_assessment/viewmodels/theme_viewmodel.dart';
 import 'package:pokedex_assessment/views/home/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   final themeVM = ThemeViewModel();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ChangeNotifierProvider(create: (context) => themeVM, child: const MyApp()),
   );
