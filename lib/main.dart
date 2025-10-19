@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pokedex_assessment/core/routes/app_router.dart';
 
 import 'package:pokedex_assessment/core/theme/app_theme.dart';
 import 'package:pokedex_assessment/firebase_options.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       themeMode: themeVm.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const HomeScreen(),
+      onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: AppRouter.auth,
     );
   }
 }

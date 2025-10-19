@@ -10,6 +10,17 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Text('Login'),
+            TextField(decoration: InputDecoration(labelText: 'Email')),
+            TextField(decoration: InputDecoration(labelText: 'Password')),
+            ElevatedButton(onPressed: () {}, child: Text('Login')),
+          ],
+        ),
+      ),
+    );
   }
 }
