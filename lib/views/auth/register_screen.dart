@@ -13,7 +13,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -21,7 +20,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -29,8 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   _register() async {
-    if (_usernameController.text.isEmpty ||
-        _emailController.text.isEmpty ||
+    if (_emailController.text.isEmpty ||
         _passwordController.text.isEmpty ||
         _confirmPasswordController.text.isEmpty) {
       ScaffoldMessenger.of(
@@ -67,11 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           spacing: 20,
           children: [
             Text('Register', style: Theme.of(context).textTheme.headlineLarge),
-            CustomInputField(
-              controller: _usernameController,
-              labelText: 'Username',
-              obscureText: false,
-            ),
+
             CustomInputField(
               controller: _emailController,
               labelText: 'Email',

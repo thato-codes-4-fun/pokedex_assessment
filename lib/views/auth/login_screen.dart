@@ -88,9 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
             CustomButton(
               onPressed: () async {
                 await _login();
-                if (context.mounted) {
-                  Navigator.pushNamed(context, AppRouter.home);
-                }
               },
               label: 'Login',
             ),

@@ -16,13 +16,7 @@ class _CustomButtonState extends State<CustomButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        setState(() {
-          context.read<AuthViewModel>().loading = true;
-        });
         await widget.onPressed();
-        setState(() {
-          context.read<AuthViewModel>().loading = false;
-        });
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
