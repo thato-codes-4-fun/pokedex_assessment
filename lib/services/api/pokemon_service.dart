@@ -14,7 +14,7 @@ class PokemonService {
   ) async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/pokemon?limit=$limit&offset=$offset'),
+        Uri.parse('$baseUrl/pokemon?limit=1000&offset=$offset'),
       );
       final data = response.body;
       return PokemonResponse.fromJson(

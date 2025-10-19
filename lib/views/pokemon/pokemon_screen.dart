@@ -26,6 +26,7 @@ class _PokemonScreenState extends State<PokemonScreen> {
     _searchController.addListener(() {
       setState(() {
         _searchQuery = _searchController.text.toLowerCase();
+        print(_searchQuery);
       });
     });
 

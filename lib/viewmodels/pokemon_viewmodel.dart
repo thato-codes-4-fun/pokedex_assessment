@@ -5,7 +5,6 @@ import 'package:pokedex_assessment/services/api/pokemon_service.dart';
 
 class PokemonViewModel extends ChangeNotifier {
   List<Pokemon> _pokemons = [];
-  List<PokemonDetails> _pokemonDetails = [];
   PokemonDetails? _pokemonDetail;
   final Map<int, PokemonDetails> _detailsCache = {};
   Pokemon? _selectedPokemon;

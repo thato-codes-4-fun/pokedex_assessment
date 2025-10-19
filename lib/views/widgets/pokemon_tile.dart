@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as context;
 import 'package:pokedex_assessment/models/pokemon.dart';
-import 'package:pokedex_assessment/viewmodels/pokemon_viewmodel.dart';
+import 'package:pokedex_assessment/services/local/favorite_service.dart';
+import 'package:pokedex_assessment/viewmodels/favourite_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class PokemonTile extends StatefulWidget {
   final Pokemon pokemon;
@@ -20,23 +21,42 @@ class _PokemonTileState extends State<PokemonTile> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: widget.onTap,
-      child: ListTile(
-        dense: true,
-        title: Text(widget.pokemon.name),
-        // subtitle: Text(widget.pokemon.url),
-        leading: Image.network(widget.pokemon.getImageUrl, fit: BoxFit.contain),
-        trailing: IconButton(
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Pokemon added to favorites')),
-            );
-          },
-          icon: Icon(Icons.favorite_border),
-          color: Colors.red,
-        ),
-      ),
+    return Consumer<FavouriteViewModel>(
+      builder: (context, favVM, child) {
+        final isFavorite = favVM.favoritePokemonsIds.contains(
+          widget.pokemon.id,
+        );
+        return InkWell(
+          onTap: widget.onTap,
+          child: ListTile(
+            dense: true,
+            title: Text(widget.pokemon.name),
+            // subtitle: Text(widget.pokemon.url),
+            leading: Image.network(
+              widget.pokemon.getImageUrl,
+              fit: BoxFit.contain,
+            ),
+            trailing: IconButton(
+              onPressed: () async {
+                await FavoriteService.handleFavoritePokemon(widget.pokemon.id);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        isFavorite
+                            ? 'Pokemon added to favorites'
+                            : 'Pokemon removed from favorites',
+                      ),
+                    ),
+                  );
+                }
+              },
+              icon: Icon(Icons.favorite_border),
+              color: isFavorite ? Colors.red : Colors.grey,
+            ),
+          ),
+        );
+      },
     );
   }
 }
