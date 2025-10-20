@@ -19,78 +19,38 @@ A Flutter-based Pokedex application that allows users to browse Pokemon, view de
 
 ## 📸 Screenshots
 
-### Theme Support - Light & Dark Mode
-
-The app features a complete theme system with seamless switching between light and dark modes. Theme preference is persisted locally using Hive.
+### Light Mode
 
 <p align="center">
-  <img src="assets/lightmode/Screenshot 2025-10-20 212044.png" width="250" alt="Light Mode" />
-  <img src="assets/darkmode/Screenshot 2025-10-20 211738.png" width="250" alt="Dark Mode" />
+  <img src="assets/lightmode/Screenshot 2025-10-20 211937.png" width="200" />
+  <img src="assets/lightmode/Screenshot 2025-10-20 211953.png" width="200" />
+  <img src="assets/lightmode/Screenshot 2025-10-20 212004.png" width="200" />
 </p>
-
-### Pokemon List - Browse & Search
-
-Infinite scroll pagination with real-time search across all Pokemon. Search results show total count and filter through 1000+ Pokemon instantly.
-
-#### Light Mode
 
 <p align="center">
-  <img src="assets/lightmode/Screenshot 2025-10-20 211937.png" width="200" alt="Pokemon List Light" />
-  <img src="assets/lightmode/Screenshot 2025-10-20 211953.png" width="200" alt="Search Light" />
-  <img src="assets/lightmode/Screenshot 2025-10-20 212004.png" width="200" alt="List Light" />
+  <img src="assets/lightmode/Screenshot 2025-10-20 212012.png" width="200" />
+  <img src="assets/lightmode/Screenshot 2025-10-20 212024.png" width="200" />
+  <img src="assets/lightmode/Screenshot 2025-10-20 212044.png" width="200" />
 </p>
 
-#### Dark Mode
+### Dark Mode
 
 <p align="center">
-  <img src="assets/darkmode/Screenshot 2025-10-20 211755.png" width="200" alt="Pokemon List Dark" />
-  <img src="assets/darkmode/Screenshot 2025-10-20 211803.png" width="200" alt="Search Dark" />
-  <img src="assets/darkmode/Screenshot 2025-10-20 211817.png" width="200" alt="List Dark" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211738.png" width="200" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211755.png" width="200" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211803.png" width="200" />
 </p>
-
-### Pokemon Details - Comprehensive Information
-
-Detailed view featuring type-based color gradients, base stats with progress bars, abilities, and high-quality sprites from PokeAPI.
-
-#### Light Mode
 
 <p align="center">
-  <img src="assets/lightmode/Screenshot 2025-10-20 212012.png" width="250" alt="Details Light 1" />
-  <img src="assets/lightmode/Screenshot 2025-10-20 212024.png" width="250" alt="Details Light 2" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211817.png" width="200" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211826.png" width="200" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211835.png" width="200" />
 </p>
-
-#### Dark Mode
 
 <p align="center">
-  <img src="assets/darkmode/Screenshot 2025-10-20 211826.png" width="250" alt="Details Dark 1" />
-  <img src="assets/darkmode/Screenshot 2025-10-20 211835.png" width="250" alt="Details Dark 2" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211845.png" width="200" />
+  <img src="assets/darkmode/Screenshot 2025-10-20 211854.png" width="200" />
 </p>
-
-### Favorites - Persistent Local Storage
-
-Save your favorite Pokemon with Hive-based local storage. Favorites persist across app restarts and work offline.
-
-#### Light Mode
-
-<p align="center">
-  <img src="assets/lightmode/Screenshot 2025-10-20 211937.png" width="250" alt="Favorites Light" />
-</p>
-
-#### Dark Mode
-
-<p align="center">
-  <img src="assets/darkmode/Screenshot 2025-10-20 211845.png" width="250" alt="Favorites Dark 1" />
-  <img src="assets/darkmode/Screenshot 2025-10-20 211854.png" width="250" alt="Favorites Dark 2" />
-</p>
-
-### Key Visual Features
-
-- **🎨 Dynamic Type Colors**: Each Pokemon type has a unique color scheme
-- **🌈 Gradient Backgrounds**: Beautiful gradients based on primary Pokemon type
-- **📊 Visual Stats**: Progress bars for HP, Attack, Defense, Speed, etc.
-- **🌓 Theme Toggle**: Smooth transitions between light and dark modes
-- **✨ Material Design 3**: Modern UI components with elevation and shadows
-- **🖼️ Cached Images**: Fast image loading with persistent caching
 
 ## 🛠️ Tech Stack
 
