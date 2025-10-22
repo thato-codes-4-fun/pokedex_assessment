@@ -77,7 +77,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   trailing: IconButton(
                     icon: const Icon(Icons.favorite, color: Colors.red),
                     onPressed: () async {
-                      await FavoriteService.handleFavoritePokemon(pokemon.id);
+                      await favVM.toggleFavorite(pokemon.id);
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              favVM.isFavorite(pokemon.id)
+                                  ? 'Pokemon added to favorites'
+                                  : 'Pokemon removed from favorites',
+                            ),
+                          ),
+                        );
+                      }
                     },
                   ),
                   onTap: () async {
