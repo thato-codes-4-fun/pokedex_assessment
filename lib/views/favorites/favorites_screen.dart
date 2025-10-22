@@ -81,14 +81,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     },
                   ),
                   onTap: () async {
-                    await context
-                        .read<PokemonViewModel>()
-                        .getPokemonDetailsByUrl(
-                          'https://pokeapi.co/api/v2/pokemon/${pokemon.id}',
-                        );
-                    if (context.mounted) {
-                      Navigator.pushNamed(context, AppRouter.pokemonDetails);
-                    }
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.favoritesDetail,
+                      arguments: pokemon.id,
+                    );
                   },
                 ),
               );

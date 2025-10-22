@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_assessment/views/auth/login_screen.dart';
 import 'package:pokedex_assessment/views/auth/register_screen.dart';
+import 'package:pokedex_assessment/views/favorites/favorites_detail_screen.dart';
 import 'package:pokedex_assessment/views/home/home_screen.dart';
 import 'package:pokedex_assessment/views/pokemon/pokemon_screen.dart';
 import 'package:pokedex_assessment/views/pokemon_details/pokemon_details.dart';
@@ -10,7 +11,7 @@ class AppRouter {
   static const String register = '/register';
   static const String home = '/home';
   static const String pokemonDetails = '/pokemon-details';
-
+  static const String favoritesDetail = '/favorites-detail';
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case login:
@@ -23,6 +24,11 @@ class AppRouter {
       case pokemonDetails:
         return MaterialPageRoute(
           builder: (context) => const PokemonDetailsScreen(),
+        );
+      case favoritesDetail:
+        return MaterialPageRoute(
+          builder: (context) =>
+              FavoritesDetailScreen(pokemonId: settings.arguments as int),
         );
       default:
         return MaterialPageRoute(builder: (context) => const LoginScreen());

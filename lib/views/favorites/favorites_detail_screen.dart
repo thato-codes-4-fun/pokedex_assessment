@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_assessment/viewmodels/pokemon_viewmodel.dart';
+import 'package:pokedex_assessment/viewmodels/favourite_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-class PokemonDetailsScreen extends StatefulWidget {
-  const PokemonDetailsScreen({super.key});
+class FavoritesDetailScreen extends StatefulWidget {
+  final int pokemonId;
+  const FavoritesDetailScreen({super.key, required this.pokemonId});
 
   @override
-  State<PokemonDetailsScreen> createState() => _PokemonDetailsScreenState();
+  State<FavoritesDetailScreen> createState() => _FavoritesDetailScreenState();
 }
 
-class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
+class _FavoritesDetailScreenState extends State<FavoritesDetailScreen> {
   static const Map<String, Color> typeColors = {
     'normal': Color(0xFFA8A878),
     'fire': Color(0xFFF08030),
@@ -43,9 +45,9 @@ class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<PokemonViewModel>(
-        builder: (context, pokemonVM, child) {
-          if (pokemonVM.loadingDetails || pokemonVM.pokemonDetail == null) {
+      body: Consumer<FavouriteViewModel>(
+        builder: (context, favVM, child) {
+          if (favVM.loading || favVM.favoritePokemons.isEmpty) {
             return Scaffold(
               appBar: AppBar(
                 leading: IconButton(
@@ -66,7 +68,9 @@ class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
             );
           }
 
-          final pokemon = pokemonVM.pokemonDetail!;
+          final pokemon = favVM.favoritePokemons.firstWhere(
+            (pokemon) => pokemon.id == widget.pokemonId,
+          );
           final primaryType = pokemon.types.isNotEmpty
               ? pokemon.types[0]
               : 'normal';
