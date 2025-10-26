@@ -4,7 +4,7 @@ class FavoriteService {
   final Box box;
   FavoriteService(this.box);
   static const String _boxName = 'favoritesBox';
-  static const String key = 'favoritePokemonsIds';
+  static const String _key = 'favoritePokemonsIds';
 
   // factory constructor for prod
   static Future<FavoriteService> create() async {
