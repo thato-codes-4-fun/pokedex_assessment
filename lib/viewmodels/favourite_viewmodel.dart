@@ -4,6 +4,7 @@ import 'package:pokedex_assessment/services/local/favorite_service.dart';
 import 'package:pokedex_assessment/services/api/pokemon_service.dart';
 
 class FavouriteViewModel extends ChangeNotifier {
+  final FavoriteService _favoriteService;
   List<int> _favoritePokemonsIds = [];
   List<PokemonDetails> _favoritePokemons = [];
   bool _loading = false;
@@ -13,7 +14,7 @@ class FavouriteViewModel extends ChangeNotifier {
   bool get loading => _loading;
   int get count => _favoritePokemonsIds.length;
 
-  FavouriteViewModel() {
+  FavouriteViewModel(this._favoriteService) {
     loadFavorites();
   }
 
@@ -26,7 +27,7 @@ class FavouriteViewModel extends ChangeNotifier {
       _loading = true;
       notifyListeners();
 
-      _favoritePokemonsIds = await FavoriteService.getFavoritePokemonsIds();
+      _favoritePokemonsIds = await _favoriteService.getFavoritePokemonsIds();
 
       await loadFavoriteDetails();
     } catch (e) {
@@ -64,17 +65,17 @@ class FavouriteViewModel extends ChangeNotifier {
   }
 
   Future<void> toggleFavorite(int pokemonId) async {
-    await FavoriteService.handleFavoritePokemon(pokemonId);
+    await _favoriteService.handleFavoritePokemon(pokemonId);
     await loadFavorites();
   }
 
   Future<void> addFavorite(int pokemonId) async {
-    await FavoriteService.addFavoritePokemon(pokemonId);
+    await _favoriteService.addFavoritePokemon(pokemonId);
     await loadFavorites();
   }
 
   Future<void> removeFavorite(int pokemonId) async {
-    await FavoriteService.removeFavoritePokemon(pokemonId);
+    await _favoriteService.removeFavoritePokemon(pokemonId);
     await loadFavorites();
   }
 }

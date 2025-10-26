@@ -38,7 +38,7 @@ class _PokemonTileState extends State<PokemonTile> {
             ),
             trailing: IconButton(
               onPressed: () async {
-                await FavoriteService.handleFavoritePokemon(widget.pokemon.id);
+                final wasAdded = await context.read<FavoriteService>().handleFavoritePokemon(widget.pokemon.id);
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
