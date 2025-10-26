@@ -1,39 +1,39 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 class FavoriteService {
+  final Box box;
+  FavoriteService(this.box);
   static const String _boxName = 'favoritesBox';
-  static const String _key = 'favoritePokemonsIds';
+  static const String key = 'favoritePokemonsIds';
 
-  static Future<Box> _getBox() async {
+  // factory constructor for prod
+  static Future<FavoriteService> create() async {
     final box = await Hive.openBox(_boxName);
-    return box;
+    return FavoriteService(box);
   }
 
-  static Future<List<int>> getFavoritePokemonsIds() async {
-    final box = await _getBox();
-    final data = box.get(_key, defaultValue: []);
+  Future<List<int>> getFavoritePokemonsIds() async {
+    final data = box.get(key, defaultValue: []);
     return data is List<int> ? data : [];
   }
 
-  static Future<void> addFavoritePokemon(int id) async {
-    final box = await _getBox();
+  Future<void> addFavoritePokemon(int id) async {
     final favoritePokemonsIds = await getFavoritePokemonsIds();
     if (!favoritePokemonsIds.contains(id)) {
       favoritePokemonsIds.add(id);
-      await box.put(_key, favoritePokemonsIds);
+      await box.put(key, favoritePokemonsIds);
     }
   }
 
-  static Future<void> removeFavoritePokemon(int id) async {
-    final box = await _getBox();
+  Future<void> removeFavoritePokemon(int id) async {
     final favoritePokemonsIds = await getFavoritePokemonsIds();
     if (favoritePokemonsIds.contains(id)) {
       favoritePokemonsIds.remove(id);
-      await box.put(_key, favoritePokemonsIds);
+      await box.put(key, favoritePokemonsIds);
     }
   }
 
-  static Future<bool> handleFavoritePokemon(int id) async {
+  Future<bool> handleFavoritePokemon(int id) async {
     final isFavorite = await getFavoritePokemonsIds();
     if (isFavorite.contains(id)) {
       await removeFavoritePokemon(id);
@@ -44,8 +44,7 @@ class FavoriteService {
     }
   }
 
-  static Future<void> clearFavorites() async {
-    final box = await _getBox();
+  Future<void> clearFavorites() async {
     await box.clear();
   }
 }
