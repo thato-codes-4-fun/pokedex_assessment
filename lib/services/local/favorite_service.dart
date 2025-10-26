@@ -13,7 +13,7 @@ class FavoriteService {
   }
 
   Future<List<int>> getFavoritePokemonsIds() async {
-    final data = box.get(key, defaultValue: []);
+    final data = box.get(_key, defaultValue: []);
     return data is List<int> ? data : [];
   }
 
@@ -21,7 +21,7 @@ class FavoriteService {
     final favoritePokemonsIds = await getFavoritePokemonsIds();
     if (!favoritePokemonsIds.contains(id)) {
       favoritePokemonsIds.add(id);
-      await box.put(key, favoritePokemonsIds);
+      await box.put(_key, favoritePokemonsIds);
     }
   }
 
@@ -29,7 +29,7 @@ class FavoriteService {
     final favoritePokemonsIds = await getFavoritePokemonsIds();
     if (favoritePokemonsIds.contains(id)) {
       favoritePokemonsIds.remove(id);
-      await box.put(key, favoritePokemonsIds);
+      await box.put(_key, favoritePokemonsIds);
     }
   }
 
